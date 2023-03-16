@@ -15,6 +15,7 @@ mongoose.connect(
 const TaskSchema = new mongoose.Schema({
   title: String,
   description: String,
+  date: Date,
   completed: Boolean,
 });
 
@@ -26,6 +27,7 @@ app.post("/tasks", async (req, res) => {
   const task = new Task({
     title,
     description,
+    date: new Date(),
     completed: false,
   });
   await task.save();
@@ -57,6 +59,7 @@ app.patch("/tasks/:id", async (req, res) => {
     {
       title,
       description,
+      date: new Date(),
       completed,
     },
     { new: true }
